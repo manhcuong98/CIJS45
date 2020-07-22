@@ -1,0 +1,25 @@
+ /* reset mac dinh  */
+*{      
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+
+}
+
+.child1{
+    background-color: #DAE8FC;
+    height: 700px;
+    width: 220px;
+}
+.child3{
+    background-color: #D5E8D4;
+    height: 800px;
+}
+.child2{
+    flex-basis: 0;
+    flex-grow: 1;
+}

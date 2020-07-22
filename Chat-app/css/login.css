@@ -1,0 +1,29 @@
+.LoginCointainer{
+    background-image: url(../images/Login-background.jpg);
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+}
+.LoginCointainer .AsideRight {
+    height: 100vh;
+    background-color: #fff;
+    width: 30%;
+}
+.LoginCointainer .AsideRight .header h3{
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    text-align: center;
+    margin-top: 50px;
+}
+#login-form {
+    padding: 20px;
+
+}
+
+.LoginCointainer .AsideRight .form-action {
+    display: flex ; 
+    justify-content: space-between;
+    align-items: center;
+}

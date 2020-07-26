@@ -34,6 +34,10 @@ controller.register = (data) => {
     else {
         document.getElementById('confirm-password-error').innerText ='' ; 
     } ;
+    if(data.firstName !== '' && data.lastName !== ''&& data.email !== '' && data.password !== '' &&
+       data.confirmPassword !=='' && data.password ===data.confirmPassword){
+           model.register(data);
+       }
     
    
 };
@@ -51,5 +55,10 @@ controller.login = (dataLogin) => {
     } 
     else{
         document.getElementById('password-error').innerText ='' ; 
+    }
+    if(dataLogin.email !== '' &&
+    dataLogin.password !== '')
+    {
+        model.login(dataLogin);
     }
 };

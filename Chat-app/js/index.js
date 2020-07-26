@@ -4,6 +4,21 @@ const init = () => {
     view.setActiveScreen('loginScreen');
     view.setActiveScreen('registerScreen');
     view.setActiveScreen('loginScreen');
-
+    var firebaseConfig = {
+        apiKey: "AIzaSyB3vGabZrlCK9xkZQmDYvjqrQ_5gAD1pI0",
+        authDomain: "chat-app-d1081.firebaseapp.com",
+        databaseURL: "https://chat-app-d1081.firebaseio.com",
+        projectId: "chat-app-d1081",
+        storageBucket: "chat-app-d1081.appspot.com",
+        messagingSenderId: "401176780142",
+        appId: "1:401176780142:web:75c8424bf3ebbb571a757f"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      console.log(firebase.app().name);
+      
+      view.setActiveScreen('registerScreen');
 };
 window.onload = init ;
+    
+

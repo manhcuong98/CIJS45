@@ -32,7 +32,7 @@ components.registerScreen =`
             <div class="error" id="confirm-password-error"></div>
         </div>
         <div class="form-action">
-            <span id="redirect-to-login">
+            <span class="cursor-pointer" id="redirect-to-login">
                 Already have an account? Login
             </span>
             <button class="btn" type="submit">
@@ -71,3 +71,7 @@ components.loginScreen =`
         </div>
     </div>
     `;
+
+components.chatScreen =`
+<div class="welcome">Welcome</div>
+`;

@@ -20,7 +20,7 @@ view.setActiveScreen = (screenName) => {
                     password: loginForm.password.value
                 };
                 // console.log(dataLogin);
-                controller.login(dataLogin);
+                controller.login(data);
             });
             break;
         case 'registerScreen':
@@ -34,7 +34,7 @@ view.setActiveScreen = (screenName) => {
                     email: registerForm.email.value,
                     password: registerForm.password.value,
                     confirmPassword: registerForm.confirmPassword.value
-                };
+                }; 
                 // console.log(data);
                 controller.register(data);
             })
@@ -42,6 +42,11 @@ view.setActiveScreen = (screenName) => {
                 view.setActiveScreen('loginScreen');
             });
             break;
+        case 'chatScreen': 
+        document.getElementById('app').innerHTML =components.chatScreen;
+        document.getElementById('app').innerText = 'Welcome to ' + model.currentUser.displayName ;
+
+        break ;
 
     }
 };

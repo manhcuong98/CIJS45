@@ -44,9 +44,52 @@ view.setActiveScreen = (screenName) => {
             break;
         case 'chatScreen': 
         document.getElementById('app').innerHTML =components.chatScreen;
-        document.getElementById('app').innerText = 'Welcome to ' + model.currentUser.displayName ;
-
-        break ;
+        // document.getElementById('welcome-user').innerText = `Welcome ${model.currentUser.displayName} to the chat app` ;
+        const sendMessageForm = document.getElementById('send-message-form')
+        sendMessageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const message = {
+                content: sendMessageForm.message.value,
+                owner: model.currentUser.email
+            };
+            const botMsg = {
+                content: sendMessageForm.message.value,
+                owner: 'bot' 
+            }
+            //
+            if(sendMessageForm.message.value.trim() !==''){
+                view.addMessage(message)
+                view.addMessage(botMsg)
+            };
+            
+            // console.log(sendMessageForm.message.value);
+            sendMessageForm.message.value ='';
+        });
+         break;
+        
 
     }
 };
+
+view.addMessage =(message)  =>{
+    const messageWrapper = document.createElement('div');
+    messageWrapper.classList.add('message-container')
+    if(message.owner === model.currentUser.email){
+        messageWrapper.classList.add('mine')
+        messageWrapper.innerHTML= `
+        <div class="content">
+            ${message.content}
+        </div>`
+    } else {
+        messageWrapper.classList.add('their');
+        messageWrapper.innerHTML =`
+        <div class="owner">
+        ${message.owner}
+        </div>
+        <div class"content">
+        ${message.content}
+        </div>`
+    }
+    document.querySelector('.list-messages').appendChild(messageWrapper);
+
+}

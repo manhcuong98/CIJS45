@@ -29,7 +29,7 @@ model.register = async (data) => {
 model.login = async (dataLogin) => {
     try {
         const response   = await firebase.auth().signInWithEmailAndPassword(dataLogin.email, dataLogin.password);
-        console.log(response);
+        // console.log(response);
         if(response.user.emailVerified === false){
             alert('Please verify your email!')
         } else {

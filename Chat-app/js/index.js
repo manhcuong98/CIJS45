@@ -15,10 +15,24 @@ const init = () => {
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-      console.log(firebase.app().name);
-      
-      view.setActiveScreen('registerScreen');
+      // console.log(firebase.app().name);
+      // view.setActiveScreen('loginScreen');
+
+      firebase.auth().onAuthStateChanged((user) => {
+        if(user) {
+          // User is signed in.
+            model.currentUser = {
+              displayName: user.displayName,
+              email: user.email
+            }
+
+          view.setActiveScreen('chatScreen');
+        } else {
+          view.setActiveScreen('loginScreen')
+        }
+      });
 };
+
 window.onload = init ;
     
 

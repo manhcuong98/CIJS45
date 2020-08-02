@@ -81,6 +81,10 @@ view.addMessage =(message)  =>{
         <div class="content">
             ${message.content}
         </div>`
+        const dataToUpdate = {
+            messages: firebase.firestore.FieldValue.arrayUnion(message)
+          }
+          firebase.firestore().collection('conversations').doc(documentIdUpdate).update(dataToUpdate);
     } else {
         messageWrapper.classList.add('their');
         messageWrapper.innerHTML =`
@@ -93,8 +97,4 @@ view.addMessage =(message)  =>{
     }
     document.querySelector('.list-messages').appendChild(messageWrapper);
 
-    const dataToUpdate = {
-        messages: firebase.firestore.FieldValue.arrayUnion(message)
-      }
-      firebase.firestore().collection('conversations').doc(documentIdUpdate).update(dataToUpdate);
 }

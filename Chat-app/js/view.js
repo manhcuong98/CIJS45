@@ -50,16 +50,17 @@ view.setActiveScreen = (screenName) => {
             e.preventDefault();
             const message = {
                 content: sendMessageForm.message.value,
-                owner: model.currentUser.email
+                owner: model.currentUser.email,
+                createdAt: new Date().toISOString()
             };
-            const botMsg = {
-                content: sendMessageForm.message.value,
-                owner: 'bot' 
-            }
+            // const botMsg = {
+            //     content: sendMessageForm.message.value,
+            //     owner: 'bot' 
+            // }
             //
             if(sendMessageForm.message.value.trim() !==''){
-                view.addMessage(message)
-                view.addMessage(botMsg)
+                view.addMessage(message)    
+                // view.addMessage(botMsg)
             };
             
             // console.log(sendMessageForm.message.value);
@@ -92,4 +93,8 @@ view.addMessage =(message)  =>{
     }
     document.querySelector('.list-messages').appendChild(messageWrapper);
 
+    const dataToUpdate = {
+        messages: firebase.firestore.FieldValue.arrayUnion(message)
+      }
+      firebase.firestore().collection('conversations').doc(documentIdUpdate).update(dataToUpdate);
 }

@@ -42,7 +42,7 @@
     top: 30px ;
     border: none;
     background: none;
-    color: #037bfe;
+    color: #037BFE;
     font-size: 24px;
 }
 #send-message-form .input-wrapper {
@@ -61,9 +61,13 @@
     border-radius: 5px;
     max-width: 40%;
     width: max-content;
+    word-break: break-all;
  }
 .chat-container .message-container.their .content{
-    background: #dadbdb;
+    background: #DADBDB;
+    color: #ffffff;
+    max-width: max-content;
+    background-color: red ;
 }
 
 .chat-container .message-container.mine .content{

@@ -1,4 +1,5 @@
 const view = {};
+
 view.setActiveScreen = (screenName) => {
     switch (screenName) {
         case 'welcomeScreen':
@@ -34,7 +35,7 @@ view.setActiveScreen = (screenName) => {
                     email: registerForm.email.value,
                     password: registerForm.password.value,
                     confirmPassword: registerForm.confirmPassword.value
-                }; 
+                };
                 // console.log(data);
                 controller.register(data);
             })
@@ -42,59 +43,75 @@ view.setActiveScreen = (screenName) => {
                 view.setActiveScreen('loginScreen');
             });
             break;
-        case 'chatScreen': 
-        document.getElementById('app').innerHTML =components.chatScreen;
-        // document.getElementById('welcome-user').innerText = `Welcome ${model.currentUser.displayName} to the chat app` ;
-        const sendMessageForm = document.getElementById('send-message-form')
-        sendMessageForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const message = {
-                content: sendMessageForm.message.value,
-                owner: model.currentUser.email,
-                createdAt: new Date().toISOString()
-            };
-            // const botMsg = {
-            //     content: sendMessageForm.message.value,
-            //     owner: 'bot' 
-            // }
-            //
-            if(sendMessageForm.message.value.trim() !==''){
-                view.addMessage(message)    
-                // view.addMessage(botMsg)
-            };
-            
-            // console.log(sendMessageForm.message.value);
-            sendMessageForm.message.value ='';
-        });
-         break;
-        
+        case 'chatScreen':
+            document.getElementById('app').innerHTML = components.chatScreen;
+            // document.getElementById('welcome-user').innerText = `Welcome ${model.currentUser.displayName} to the chat app` ;
+            const sendMessageForm = document.getElementById('send-message-form')
+            sendMessageForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const message = {
+                    content: sendMessageForm.message.value,
+                    owner: model.currentUser.email,
+                    createdAt: (new Date()).toISOString()
+                };
+                // const botMsg = {
+                //     content: sendMessageForm.message.value,
+                //     owner: 'bot' 
+                // }
+                //
+                if (sendMessageForm.message.value.trim() !== '') {
+                    model.addMessage(message)
+                    // view.addMessage(botMsg)
+                };
+
+                // console.log(sendMessageForm.message.value);
+                sendMessageForm.message.value = '';
+            });
+            model.loadConversations()
+            model.listenConversationsChange() //lang nghe thay doi chat ma tham gia
+
+            break;
 
     }
 };
 
-view.addMessage =(message)  =>{
+view.addMessage = (message) => {
     const messageWrapper = document.createElement('div');
     messageWrapper.classList.add('message-container')
-    if(message.owner === model.currentUser.email){
+    if (message.owner === model.currentUser.email) {
         messageWrapper.classList.add('mine')
-        messageWrapper.innerHTML= `
+        messageWrapper.innerHTML = `
         <div class="content">
             ${message.content}
         </div>`
-        const dataToUpdate = {
-            messages: firebase.firestore.FieldValue.arrayUnion(message)
-          }
-          firebase.firestore().collection('conversations').doc(documentIdUpdate).update(dataToUpdate);
+
     } else {
         messageWrapper.classList.add('their');
-        messageWrapper.innerHTML =`
+        messageWrapper.innerHTML = `
         <div class="owner">
         ${message.owner}
         </div>
-        <div class"content">
+        <div class"content" style="background: #F1F0F0;
+        color: #000 ;max-width: max-content;">
         ${message.content}
         </div>`
     }
     document.querySelector('.list-messages').appendChild(messageWrapper);
 
+}
+
+view.showCurrentConversation = () => {
+    //doi ten cuoc tro chuyen
+    document.getElementsByClassName('conversation-header')[0].innerText = model.currentConversation.title
+
+    // in cac tin nhan len man hinh 
+    for (message of model.currentConversation.messages) {
+        view.addMessage(message);
+    }
+    view.scrollToEndElement()
+}
+
+view.scrollToEndElement =() => {
+    const element = document.querySelector('.list-messages')
+    element.scrollTop =element.scrollHeight
 }

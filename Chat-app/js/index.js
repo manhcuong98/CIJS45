@@ -61,7 +61,7 @@ firestoreFuntion = async () => {
   // console.log(getDataFromdoc(response2.docs[1]));
 
   const listUser = getDataFromdocs(response2.docs)
-  console.log(listUser);
+  // console.log(listUser);
 
   //*********************add document*****************  // chi 1 document khong duoc nhieu 
   // const userToAdd = {

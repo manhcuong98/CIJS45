@@ -35,7 +35,7 @@ const init = () => {
 
       // console.log(user);
 
-      view.setActiveScreen('chatScreen');
+      // view.setActiveScreen('chatScreen');
     } else {
       view.setActiveScreen('loginScreen')
     }
@@ -70,7 +70,7 @@ firestoreFuntion = async () => {
   //   email: 'abcxyz@gmail.com'
   // };
   //  
-
+  // firebase.firestore().collection('users').add(userToAdd)
   //****************update document*****************//
   documentIdUpdate = 'dfvdeERUylaxBecpyNLS';
   const dataToUpdate = {
@@ -80,6 +80,7 @@ firestoreFuntion = async () => {
       owner: "test"})
   }
   // firebase.firestore().collection('conversations').doc(documentIdUpdate).update(dataToUpdate);
+  
   //*****************delete document***************//
   const docToDeltete = 'lgIxiQM5Lng6wnzaAbjs';
   firebase.firestore().collection('users').doc(docToDeltete).delete();

@@ -62,42 +62,53 @@ model.addMessage = (message) => {
 model.loadConversations = async () => {
     const response = await firebase.firestore().collection(model.collectionName).where('users', 'array-contains', model.currentUser.email).get()
     model.conversations = getDataFromdocs(response.docs)  //lay du lieu firebase (list luu vao conversation => check >0 => gan cho cuoc tro chuyen dau tien)
-    if(model.conversations.length >0) {
+    if (model.conversations.length > 0) {
         model.currentConversation = model.conversations[0];
         view.showCurrentConversation()
     };
+    view.showConversations();
 }
 
 model.listenConversationsChange = () => {
-    let isFirstRun =true ;
-    firebase.firestore().collection(model.collectionName).where('users', 'array-contains', model.currentUser.email).onSnapshot((res) =>{
+    let isFirstRun = true;
+    firebase.firestore().collection(model.collectionName).where('users', 'array-contains', model.currentUser.email).onSnapshot((res) => {
         // console.log(getDataFromdocs(res.docChanges()));
-        if(isFirstRun){
-            isFirstRun =false ;
+        if (isFirstRun) {
+            isFirstRun = false;
             return
         }
         const docChanges = res.docChanges()
-    
-        for(oneChange of docChanges){
+
+        for (oneChange of docChanges) {
             const type = oneChange.type;
-            if(type === 'modified'){
-            const docData = getDataFromdoc(oneChange.doc)
+            if (type === 'modified') {
+                const docData = getDataFromdoc(oneChange.doc)
 
-            //update lai model.conversations
-            for(let i =0 ; i < model.conversations.length; i++){
-                if(model.conversations[i].id === docData.id){
-                    model.conversations[i] = docData
+                //update lai model.conversations
+                for (let i = 0; i < model.conversations.length; i++) {
+                    if (model.conversations[i].id === docData.id) {
+                        model.conversations[i] = docData
+                    }
+                };
+
+                //update model.currenConversation
+                if (docData.id === model.currentConversation.id) {
+                    model.currentConversation = docData
+                    const lastMessage = docData.messages[docData.messages.length - 1]
+                    view.addMessage(lastMessage);
+                    view.scrollToEndElement()
                 }
-            };
-
-            //update model.currenConversation
-            if(docData.id === model.currentConversation.id) {
-                model.currentConversation = docData 
-                const lastMessage = docData.messages[docData.messages.length -1]
-                view.addMessage(lastMessage);
-                view.scrollToEndElement()
-            }
             }
         };
     })
+}
+
+model.createConversation = (dataCreateConversation) => {
+    const dataToadd = {
+        createdAt: new Date().toISOString(),
+        messages:[],
+        title: dataCreateConversation.title, 
+        users:['manhcuong.qn1998@gmail.com', dataCreateConversation.email]
+    }
+    firebase.firestore().collection(model.collectionName).add(dataToadd)
 }

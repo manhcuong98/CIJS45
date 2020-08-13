@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Document-test</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/register.css">
     <link rel="stylesheet" href="../css/login.css">
@@ -36,7 +36,7 @@
             </form>
         </div>
     </div> -->
-    <div class="chat-container">
+    <!-- <div class="chat-container">
         <div class="header">
             <button type="submit" id="log-out">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
@@ -44,6 +44,22 @@
             Mindx Chat
         </div>
         <div class="main">
+            <div class="aside-left">
+                <div class="create-conversation">
+                    <button class="btn">+New conversation</button>
+                </div>
+                <div class="list-conversations">
+                    <div class="conversation current cursor-pointer">
+                        <div class="conversation-title">First conversation</div>
+                        <div class="conversation-num-user">2 user</div>
+                    </div>
+                    <div class="conversation cursor-pointer">
+                        <div class="conversation-title">Second conversation</div>
+                        <div class="conversation-num-user">2 user</div>
+                    </div>
+
+                </div>
+            </div>
             <div class="conversation-detail">
                 <div class="conversation-header">
                     First conversation
@@ -52,7 +68,7 @@
                     <div class="message-container mine">
                         <div class="content">
                             Hello world
-                            <div class="time" style="">Thứ 6, 07/08/2020 19:20</div>
+                            <div class="time" style="#">Thứ 6, 07/08/2020 19:20</div>
                         </div>
                     </div>
                     <div class="message-container their">
@@ -73,6 +89,28 @@
                     </button>
                 </form>
             </div>
+        </div>
+    </div> -->
+    <div class="create-conversation-container">
+        <div class="header">
+            Mindx Chat
+        </div>
+        <div class="main" style="padding: 50px 20%;">
+            <form id="create-conversation-form">
+                <div style="padding-bottom: 10px;">
+                    Create a new conversation
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Conversation name" name="conversationTitle">
+                    <div class="error" id="conversation-name-error"></div>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Friend email" name="conversationEmail">
+                    <div class="error" id="conversation-email-error"></div>
+                </div>
+                <button class="btn" type="submit">Save</button>
+                <button class="btn btn-light" type="button" id="back-to-chat">Cancel</button>
+            </form>
         </div>
     </div>
 </body>

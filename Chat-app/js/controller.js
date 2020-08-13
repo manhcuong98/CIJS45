@@ -62,3 +62,20 @@ controller.login = (dataLogin) => {
         model.login(dataLogin);
     }
 };
+
+controller.createConversation = (dataCreateConversation) =>{
+    if(dataCreateConversation.conversationTitle ===''){
+        document.getElementById('conversation-name-error').innerHTML='Please input Conversation name' ;
+    } else{
+        document.getElementById('conversation-name-error').innerHTML='' ;
+    }
+    if(dataCreateConversation.conversationEmail ===''){
+        document.getElementById('conversation-email-error').innerHTML='Please input Friend email' ;
+    } else{
+        document.getElementById('conversation-email-error').innerHTML='' ;
+    }
+    if(dataCreateConversation.conversationTitle !=='' && dataCreateConversation.conversationEmail !==''){
+        model.createConversation(dataCreateConversation);
+    }
+}
+

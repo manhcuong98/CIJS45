@@ -102,7 +102,30 @@
 
 .chat-container .list-conversations .conversation{
     padding: 5px 10px;
+    position: relative;
+}
+.chat-container .conversation .notification{
+    width: 15px;
+    height: 15px;
+    background: #027bfd;
+    border-radius: 50%;
+    position: absolute;
+    right: 8px;
+    top: 13px;
+    display: none;
 }
 .chat-container .list-conversations .conversation.current{
     background-color: #dbdbdb;
+}
+.chat-container .aside-right{
+    padding: 10px;
+    border-left: 1px solid #dbdbdb;
+    width: 12%;
+}
+.chat-container .aside-right .user{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.chat-container #add-user-form{
+    margin-top: 12px;
 }

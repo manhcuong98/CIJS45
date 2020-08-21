@@ -63,19 +63,36 @@ controller.login = (dataLogin) => {
     }
 };
 
-controller.createConversation = (dataCreateConversation) =>{
-    if(dataCreateConversation.conversationTitle ===''){
-        document.getElementById('conversation-name-error').innerHTML='Please input Conversation name' ;
+controller.createConversation = ({conversationTitle, conversationEmail}) =>{
+    if(conversationTitle.trim() ===''){
+        view.setErrorMessage('conversation-name-error', 'Please input Conversation name')
     } else{
-        document.getElementById('conversation-name-error').innerHTML='' ;
+        view.setErrorMessage('conversation-name-error', '');
     }
-    if(dataCreateConversation.conversationEmail ===''){
-        document.getElementById('conversation-email-error').innerHTML='Please input Friend email' ;
-    } else{
-        document.getElementById('conversation-email-error').innerHTML='' ;
+    if(conversationEmail.trim() ===''){
+        view.setErrorMessage('conversation-email-error','Please input Friend email')
+    }else{
+        view.setErrorMessage('conversation-email-error', '');
     }
-    if(dataCreateConversation.conversationTitle !=='' && dataCreateConversation.conversationEmail !==''){
-        model.createConversation(dataCreateConversation);
+    
+    if(conversationTitle.trim() !=='' && conversationEmail.trim() !==''){
+        const data = {
+            title: conversationTitle, 
+            users: [conversationEmail,  model.currentUser.email],
+            createdAt: (new Date()).toISOString(),
+            messages: []
+        }
+        model.createConversation(data);
     }
 }
 
+controller.addUser = (user) => {
+    if(user.trim() === ''){
+        view.setErrorMessage('add-user-email-error', 'Please input email');
+    }else{
+        view.setErrorMessage('add-user-email-error', '')
+    }
+    if(user.trim() !== ''){
+        model.addUser(user);
+    }
+}

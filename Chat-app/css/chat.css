@@ -103,6 +103,7 @@
 .chat-container .list-conversations .conversation{
     padding: 5px 10px;
     position: relative;
+
 }
 .chat-container .conversation .notification{
     width: 15px;
@@ -128,4 +129,28 @@
 }
 .chat-container #add-user-form{
     margin-top: 12px;
+}
+
+@media screen and (max-width: 768px){
+    .aside-right{
+        display: none;
+
+    }
+    .aside-left .conversation-num-user{
+        display: none;
+    }
+    .chat-container .list-conversations .conversation{
+        border-radius: 50%;
+        border: 1px solid #dbdbdb;
+        width: 64px;
+        height: 64px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px auto;
+    }
+    .list-conversations .conversation .notification{
+        top: 23px ;
+        
+    }
 }

@@ -86,6 +86,7 @@ view.setActiveScreen = (screenName, fromCreateConversation = false) => {
                 controller.addUser(user);
                 addUserForm.email.value = '';
             })
+               
             document.querySelector('#send-message-form input').addEventListener('click', ()=>{
                 view.hideNotification(model.currentConversation.id)
             })
@@ -185,6 +186,28 @@ view.addConversation = (conversation) => {
         <div class="notification"></div>
     
         `
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    // console.log(mediaQuery);
+
+    
+    if(mediaQuery.matches){
+        const firstCharacter = conversation.title.charAt(0).toUpperCase()
+        conversationWrapper.firstElementChild.innerText = firstCharacter ; 
+        // document.querySelector('.create-conversation .btn').innerText= "+";
+    }
+    
+     mediaQuery.addListener((e) =>{
+         if(e.matches){
+        const firstCharacter = conversation.title.charAt(0).toUpperCase()
+        conversationWrapper.firstElementChild.innerText = firstCharacter ; 
+        document.querySelector('.create-conversation .btn').innerText= "+";
+         }
+         else{
+            conversationWrapper.firstElementChild.innerText = conversation.title; 
+            document.querySelector('.create-conversation .btn').innerText= "+ New conversation" ;
+         }
+     });
+
     conversationWrapper.addEventListener('click', () => {
         //thay doi giao dien, doi current
         document.querySelector('.current').classList.remove('current')

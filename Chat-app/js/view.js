@@ -90,6 +90,10 @@ view.setActiveScreen = (screenName, fromCreateConversation = false) => {
             document.querySelector('#send-message-form input').addEventListener('click', ()=>{
                 view.hideNotification(model.currentConversation.id)
             })
+            document.querySelector('.sidebar').addEventListener('click', ()=> {
+                document.querySelector('.aside-right').classList.toggle('show')
+                document.querySelector('.sidebar').classList.toggle('move-sidebar');
+            })
             break;
         case 'createConversation':
             document.getElementById('app').innerHTML = components.createConversation;

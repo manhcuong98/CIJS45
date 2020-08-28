@@ -130,8 +130,29 @@
 .chat-container #add-user-form{
     margin-top: 12px;
 }
+.sidebar{
+    position: absolute;
+    top: 63px;
+    right: 13px;
+    color: #027bfd;
+    display: none;
+}
 
+.show{
+    position: fixed;
+    display: block !important;
+    right: 0px;
+    background: #fff;
+    display: none;
+}
+.move-sidebar{
+    right: 14%;
+}
 @media screen and (max-width: 768px){
+    .sidebar{
+        display: block;
+    }
+    
     .aside-right{
         display: none;
 
